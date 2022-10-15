@@ -9,6 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/users', require('./api/users.js'));
+app.use('/api/blueprints', require('./api/blueprints.js'));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`[express]: Runs on port ${port}`));
