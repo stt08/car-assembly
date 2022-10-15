@@ -32,6 +32,19 @@ router.post('/', async (req,res) => {
   res.status(201).send();
 })
 
+router.post('/:id', async (req,res) => {
+  let blueprints = await getdata();
+  try {
+    let id = new ObjectId(req.params.id);
+    await users.updateOne({_id: id}, {$set:{
+      name: req.body.name,
+      items: req.body.items,
+      createdAt: new Date()
+    }});
+    res.status(200).send();
+  } catch (e) { res.send(empty); }
+})
+
 router.delete('/:id', async (req,res) => {
   let blueprints = await getdata();
   await blueprints.deleteOne({ _id: new ObjectId(req.params.id) });
