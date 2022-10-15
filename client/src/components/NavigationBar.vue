@@ -7,10 +7,11 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="me-auto navbar-nav">
-          <a class="nav-link" href="storage">Storage</a>
-          <a class="nav-link" href="assembly">Assembly</a>
-          <a class="nav-link" href="products">Products</a>
-          <a class="nav-link" href="admin">Admin</a>
+          
+          <router-link class="nav-link" to="storage">Storage</router-link>
+          <router-link class="nav-link" to="assembly">Assembly</router-link>
+          <router-link class="nav-link" to="products">Products</router-link>
+          <router-link class="nav-link" to="admin">Admin</router-link>
         </div>
         <button class="btn text-white" onclick="loginAction()">Login</button>
       </div>
