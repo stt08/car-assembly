@@ -36,7 +36,7 @@ router.post('/:id', async (req,res) => {
   let blueprints = await getdata();
   try {
     let id = new ObjectId(req.params.id);
-    await users.updateOne({_id: id}, {$set:{
+    await blueprints.updateOne({_id: id}, {$set:{
       name: req.body.name,
       items: req.body.items,
       createdAt: new Date()
