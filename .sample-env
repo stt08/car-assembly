@@ -1,1 +1,3 @@
-MONGO=
+# DATABASE CONFIGURATION:
+# MONGO is a connection-string link for the MongoDB server
+MONGO=mongodb+srv://{user}:{password}@{hostname}
