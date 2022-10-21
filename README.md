@@ -14,7 +14,7 @@ git clone https://github.com/stt08/car-assembly.git
 ```
 Install the dependencies (server):
 ```bash
-# path: ./car-assembly
+# path: ./car-assembly/server
 npm install
 ```
 Install the dependencies (client):
@@ -26,7 +26,7 @@ npm install
 ## Run the project
 Server side
 ```bash
-# path: ./car-assembly
+# path: ./car-assembly/server
 npm run dev
 ```
 Client side
