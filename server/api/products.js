@@ -23,6 +23,9 @@ router.get('/:id', async (req,res) => {
 })
 
 router.post('/', async (req,res) => {
+  // check if any of the required fields are empty
+  if (req.body.name == "" || req.body.status == "" || !(req.body.price > 0) || !(req.body.amount > 0)) return res.status(400).send("Incorrect data")
+
   let products = await getdata();
   await products.insertOne({
     name: req.body.name,
@@ -37,6 +40,9 @@ router.post('/', async (req,res) => {
 })
 
 router.post('/:id', async (req,res) => {
+  // check if any of the required fields are empty
+  if (req.body.name == "" || req.body.status == "" || !(req.body.price > 0) || !(req.body.amount > 0)) return res.status(400).send("Incorrect data")
+
   let products = await getdata();
   try {
     let id = new ObjectId(req.params.id);
