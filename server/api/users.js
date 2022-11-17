@@ -23,6 +23,9 @@ router.get('/:id', async (req,res) => {
 })
 
 router.post('/', async (req,res) => {
+  // check if any of the required fields are empty
+  if (req.body.name == "" || req.body.role == "" || req.body.secret == "") return res.status(400).send("Incorrect data");
+
   let users = await getdata();
   await users.insertOne({
     name: req.body.name,
@@ -34,6 +37,9 @@ router.post('/', async (req,res) => {
 })
 
 router.post('/:id', async (req,res) => {
+  // check if any of the required fields are empty
+  if (req.body.name == "" || req.body.role == "" || req.body.secret == "") return res.status(400).send("Incorrect data");
+
   let users = await getdata();
   try {
     let id = new ObjectId(req.params.id);
