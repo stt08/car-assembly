@@ -54,7 +54,7 @@
           <div class="mb-2" v-for="(item, index) in modifyTarget.items" :key="index">
             <label for="bp-name">
               Item {{index}}
-              <button class="btn btn-sm btn-outline-danger py-0" @click="deleteItem($event, index)">
+              <button class="btn btn-sm btn-outline-danger py-0" @click="modify_removeFromArray($event, index)">
                 <i class="fa fa-trash-o"></i> Delete
               </button>
             </label>
@@ -163,6 +163,9 @@
       </div>
     </div>
   </div>
+  <div id="alert" class="new-alert">
+    <p id="alert_msg"></p>
+  </div>
 </template>
 
 
@@ -223,7 +226,7 @@ export default {
     },
     setArrayValue(e, target, index) {
       e.preventDefault();
-      let res = event.target.value;
+      let res = e.target.value;
       switch (target) {
         case 'new_id':        this.newItems[index].id = res; break;
         case 'new_amount':    this.newItems[index].amount = res; break;
@@ -268,18 +271,37 @@ export default {
       await BlueprintService.delete(id);
       this.load();
     },
+    async showAlert(status,msg) {
+      let alert = document.getElementById('alert');
+      let alert_msg = document.getElementById('alert_msg');
+      alert_msg.innerHTML = `<i class="fa fa-fw ${ status == 'ok' ? 'fa-check' : 'fa-exclamation-triangle' }" aria-hidden="true"></i> ${msg}`;
+      alert.style.backgroundColor = (status == 'ok' ? '#d4edda' : '#f8d7da');
+      alert.classList.add('animate');
+      setTimeout(() => {
+        alert.classList.remove('animate');
+      }, 10000);
+    },
     async modify(e) {
       e.preventDefault();
       let target = this.modifyTarget;
-      await BlueprintService.modify(target._id, target.name, target.items);
-      document.getElementById('bp-selector').value = '0';
-      this.modifyTarget = {name:'', items:[]};
-      this.load();
+      let result = await BlueprintService.modify(target._id, target.name, target.items);
+      if (result.status && result.status == 200) {
+        this.showAlert('ok', 'Blueprint modified successfully!');
+        document.getElementById('bp-selector').value = '0';
+        this.modifyTarget = {name:'', items:[]};
+        this.load();
+      }
+      else this.showAlert('error', result);
     },
     async create(e) {
       e.preventDefault();
-      await BlueprintService.insert(this.newTarget.name, this.newItems);
-      this.load();
+      let result = await BlueprintService.insert(this.newTarget.name, this.newItems);
+      if (result.status && result.status == 201) {
+        this.showAlert('ok', 'Blueprint created successfully!');
+        this.newTarget = {name:'', items:[]};
+        this.load();
+      }
+      else this.showAlert('error', result);
     }
   }
 }
@@ -290,4 +312,32 @@ export default {
 .main { text-align: start; }
 .tab-pane { padding: 20px; }
 .btn { font-weight: bold; }
+
+.new-alert {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  max-width: 100%;
+  min-height: 60px;
+  text-align: start;
+  border: 1px solid gray;
+  border-radius: 0.25rem;
+}
+
+.animate {
+  display: block;
+  animation: forwards;
+  animation-duration: 0.5s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+    from { right: -100%; }
+    to { right: 0; }
+  }
+
 </style>

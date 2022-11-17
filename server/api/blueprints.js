@@ -25,6 +25,9 @@ router.get('/:id', async (req,res) => {
 router.post('/', async (req,res) => {
   // check if any of the required fields are empty
   if (req.body.name == "" || req.body.items.length == 0) return res.status(400).send("Incorrect data")
+  for (let i = 0; i < req.body.items.length; i++) {
+    if (req.body.items[i].name == "" || req.body.items[i].amount < 1) return res.status(400).send("Incorrect data")
+  }
 
   let blueprints = await getdata();
   await blueprints.insertOne({
