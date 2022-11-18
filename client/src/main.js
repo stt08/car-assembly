@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { createApp } from 'vue'
 import App from './App.vue'
 
+import QrReader from 'vue3-qr-reader';
 
 const routes = [
   {path: '/', component: () => import('./components/HelloWorld.vue')},
@@ -17,4 +18,4 @@ const router = createRouter({
 })
 
 
-createApp(App).use(router).mount('#app')
+createApp(App).use(router).use(QrReader).mount('#app')
