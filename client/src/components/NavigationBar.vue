@@ -12,7 +12,7 @@
           <router-link class="nav-link" to="products">Products</router-link>
           <router-link class="nav-link" to="admin">Admin</router-link>
         </div>
-        <button class="btn text-white" @click="loginAction" data-bs-toggle="modal" data-bs-target="#modal">
+        <button class="btn text-white" @click="loginAction" data-bs-toggle="modal" data-bs-target="#authModal">
           <i class="fas fa-user"></i>
           {{ loggedIn ? 'Logout' : 'Login' }}
         </button>
@@ -20,7 +20,7 @@
     </div>
   </nav>
 
-  <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
