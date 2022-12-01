@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/api/blueprints/';
+const url = `${process.env.VUE_APP_URL}/api/blueprints/`;
 
 class BlueprintService {
   // Handle errors

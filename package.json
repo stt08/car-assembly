@@ -1,0 +1,20 @@
+{
+  "name": "carassembly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/app.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && cd ..",
+    "start": "node server/app.js",
+    "heroku-prebuild": "cd client && npm install -g @vue/cli-service @vue/cli-plugin-babel @vue/cli-plugin-eslint && cd .."
+  },
+  "author": "Tamerlan",
+  "license": "ISC",
+  "dependencies": {
+    "carassembly-client": "file:client",
+    "carassembly-server": "file:server"
+  },
+  "engines": {
+    "node": "14"
+  }
+}

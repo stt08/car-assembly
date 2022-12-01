@@ -1,3 +1,8 @@
-# DATABASE CONFIGURATION:
 # MONGO is a connection-string link for the MongoDB server
 MONGO=mongodb+srv://{user}:{password}@{hostname}
+
+# VUE_APP_URL is a part which defines the domain that API uses
+VUE_APP_URL=http://localhost:3000
+
+# NODE_ENV is defined for testing (and production) purpose
+NODE_ENV=production

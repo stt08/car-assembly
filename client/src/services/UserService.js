@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/api/users/';
+const url = `${process.env.VUE_APP_URL}/api/users/`;
 
 class UserService {
   // Get all items
