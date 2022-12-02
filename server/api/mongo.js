@@ -6,4 +6,4 @@ mongo.connect((err, res) => {
   else console.log("[mongodb]: Successful connection");
 });
 
-module.exports = mongo.db('db');
+module.exports = {mongo: mongo.db('db')};

@@ -9,10 +9,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 
-app.use('/api/users', require('./api/users.js'));
-app.use('/api/items', require('./api/items.js'));
-app.use('/api/blueprints', require('./api/blueprints.js'));
-app.use('/api/products', require('./api/products.js'));
+app.use('/api/users', require('./api/users.js').router);
+app.use('/api/items', require('./api/items.js').router);
+app.use('/api/blueprints', require('./api/blueprints.js').router);
+app.use('/api/products', require('./api/products.js').router);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.resolve(__dirname, '../pages')));
