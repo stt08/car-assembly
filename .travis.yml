@@ -25,7 +25,7 @@ deploy:
     branch: main
 after_failure:
   - curl -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/editMessageText -d chat_id=$TELEGRAM_CHAT_ID -d parse_mode="HTML" -d disable_web_page_preview="True" -d message_id=$msgid -d text="<b>Build failed!</b> %0ABuild was rejected by Travis CI - some errors found. Working version is still available at <a href='https://car-assembly.herokuapp.com'>Heroku</a> (if branch is main) %0A%0ABranch - <a href='https://github.com/stt08/car-assembly/tree/$TRAVIS_BRANCH'>$TRAVIS_BRANCH</a>"
+  - curl -X POST -F document=@"output.txt" https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument?chat_id=$TELEGRAM_CHAT_ID&reply_to_message_id=$msgid&allow_sending_without_reply=true
 after_success:
   - curl -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/editMessageText -d chat_id=$TELEGRAM_CHAT_ID -d parse_mode="HTML" -d disable_web_page_preview="True" -d message_id=$msgid -d text="<b>Successful build!</b> %0ATravis CI found no errors during the build. It will be deployed to <a href='https://car-assembly.herokuapp.com'>Heroku</a> (if branch is main) %0A%0ABranch - <a href='https://github.com/stt08/car-assembly/tree/$TRAVIS_BRANCH'>$TRAVIS_BRANCH</a>"
-after_script:
   - curl -X POST -F document=@"output.txt" https://api.telegram.org/bot$TELEGRAM_TOKEN/sendDocument?chat_id=$TELEGRAM_CHAT_ID&reply_to_message_id=$msgid&allow_sending_without_reply=true
