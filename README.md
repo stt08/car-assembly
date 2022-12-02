@@ -1,5 +1,6 @@
 # Modern Car Assembly
-(description)
+[![Build Status](https://app.travis-ci.com/stt08/car-assembly.svg?branch=main)](https://app.travis-ci.com/stt08/car-assembly)
+(description) 
 
 ## Team members
 Panta Wittawin (HDZSFE) [black-hole-diver](https://github.com/black-hole-diver)  

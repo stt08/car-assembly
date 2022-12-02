@@ -194,8 +194,12 @@ export default {
   },
   methods: {
     async load() {
+      console.log('url:' + process.env.URL);
+      console.log(process.env);
       this.blueprints = await BlueprintService.load();
       this.items = await ItemService.load();
+      console.log(this.blueprints);
+      console.log(this.items);
     },
     showItemModal(itemId, itemAmount) {
       let target = this.items.find(a => a._id == itemId) || {_id: itemId, name: '(not-found)', amount: 0};

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/api/items/';
+const url = `${process.env.VUE_APP_URL}/api/items/`;
 
 class ItemService {
   // Get all items
