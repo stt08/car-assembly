@@ -4,7 +4,8 @@
   "description": "",
   "main": "server/app.js",
   "scripts": {
-    "build": "cd client && npm install && npm run build && cd ../server && npm install && cd ..",
+    "install": "cd client && npm install && cd ../server && npm install && cd ..",
+    "build": "cd client && npm run build && cd ..",
     "start": "node server/app.js",
     "heroku-prebuild": "cd client && npm install -g @vue/cli-service @vue/cli-plugin-babel @vue/cli-plugin-eslint && cd .."
   },
