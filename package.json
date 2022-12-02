@@ -8,6 +8,7 @@
     "build": "cd client && npm run build && cd ..",
     "start": "node server/app.js",
     "test": "cd server && npm install -g jest && npm run test",
+    "customTest": "cd server && npm install -g jest && npm run customTest && npm run customTest --no-color &> ../output.txt",
     "heroku-prebuild": "cd client && npm install -g @vue/cli-service @vue/cli-plugin-babel @vue/cli-plugin-eslint && cd .."
   },
   "author": "Tamerlan",

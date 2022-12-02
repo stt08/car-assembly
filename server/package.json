@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
-    "test": "jest --silent --forceExit"
+    "test": "jest --silent --forceExit",
+    "customTest": "jest --silent --forceExit --verbose --coverage"
   },
   "author": "Tamerlan",
   "license": "ISC",
