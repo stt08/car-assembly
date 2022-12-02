@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 14
+install:
+  - echo 'npm run build includes installation'
+script:
+  - npm run build
+  - echo `MONGO=$MONGO` > .env
+  - echo `Current branch - $TRAVIS_BRANCH`
+cache:
+  directories:
+    - node_modules
+    - server/node_modules
+    - client/node_modules
+before_deploy:
+  - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
