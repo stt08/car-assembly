@@ -1,6 +1,8 @@
 language: node_js
 node_js:
   - 14
+before_install:
+  - msgid=$(echo `curl -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/sendMessage -d chat_id="-1001519558371" -d parse_mode="HTML" -d disable_web_page_preview="True" -d "text=<b>Build is in progress...</b> %0A%0ABranch - <a href='https://github.com/stt08/car-assembly/tree/$TRAVIS_BRANCH'>$TRAVIS_BRANCH</a>" -s` | sed -n 's/.*"message_id":\([0-9]*\).*/\1/p')
 install:
   - echo 'npm run build includes installation'
 script:
@@ -14,3 +16,13 @@ cache:
     - client/node_modules
 before_deploy:
   - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API
+  app: car-assembly
+  on:
+    branch: main
+after_failure:
+  - curl -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/editMessageText -d chat_id=$TELEGRAM_CHAT_ID -d parse_mode="HTML" -d disable_web_page_preview="True" -d message_id=$msgid -d text="<b>Build failed!</b> %0ABuild was rejected by Travis CI - some errors found. Working version is still available at <a href='https://car-assembly.herokuapp.com'>Heroku</a> (if branch is main) %0A%0ABranch - <a href='https://github.com/stt08/car-assembly/tree/$TRAVIS_BRANCH'>$TRAVIS_BRANCH</a>"
+after_success:
+  - curl -X POST https://api.telegram.org/bot$TELEGRAM_TOKEN/editMessageText -d chat_id=$TELEGRAM_CHAT_ID -d parse_mode="HTML" -d disable_web_page_preview="True" -d message_id=$msgid -d text="<b>Successful build!</b> %0ATravis CI found no errors during the build. It will be deployed to <a href='https://car-assembly.herokuapp.com'>Heroku</a> (if branch is main) %0A%0ABranch - <a href='https://github.com/stt08/car-assembly/tree/$TRAVIS_BRANCH'>$TRAVIS_BRANCH</a>"
